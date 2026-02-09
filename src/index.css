@@ -33,7 +33,16 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  padding-top: 110px;
   gap: 32px;
+}
+
+.home-navbar {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+  right: 20px;
 }
 
 .home-title {
@@ -43,17 +52,32 @@ a {
   text-align: center;
 }
 
+.countdown {
+  margin: 0;
+  text-align: center;
+  font-size: 1.6rem;
+  color: #b22222;
+}
+
+.countdown-label {
+  font-weight: 700;
+}
+
 .tabs-nav {
   display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  justify-content: center;
+  width: 100%;
+  gap: 10px;
+  justify-content: space-between;
 }
 
 .tab-link {
-  padding: 8px 12px;
+  flex: 1;
+  padding: 12px 8px;
   border: 1px solid #111111;
   text-decoration: none;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 .tab-link:hover {
