@@ -7,7 +7,12 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:5173"
+    allowed_origins = ENV.fetch("CORS_ALLOWED_ORIGINS", "http://localhost:5173")
+      .split(",")
+      .map(&:strip)
+      .reject(&:empty?)
+
+    origins(*allowed_origins)
 
     resource "*",
       headers: %w[Content-Type X-GOGOLISTAN-WRITE-PASSWORD],

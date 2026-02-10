@@ -1,0 +1,35 @@
+databases:
+  - name: gogolistan-db
+    plan: free
+
+services:
+  - type: web
+    name: gogolistan-api
+    env: ruby
+    rootDir: gogolistan-api
+    plan: free
+    buildCommand: bundle install
+    startCommand: bundle exec rails server -p $PORT -e production
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gogolistan-db
+          property: connectionString
+      - key: SECRET_KEY_BASE
+        sync: false
+      - key: GOGOLISTAN_WRITE_PASSWORD
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+
+  - type: static_site
+    name: gogolistan-front
+    rootDir: .
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    pullRequestPreviewsEnabled: false
+    envVars:
+      - key: VITE_API_URL
+        sync: false

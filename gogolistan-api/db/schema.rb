@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_10_003000) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_10_004000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "people", force: :cascade do |t|
+    t.jsonb "checklist_items", default: [], null: false
     t.datetime "created_at", null: false
     t.string "name", null: false
     t.string "slug", null: false

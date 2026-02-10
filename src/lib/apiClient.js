@@ -1,4 +1,13 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const rawApiBaseUrl = import.meta.env.VITE_API_URL;
+const API_BASE_URL = rawApiBaseUrl
+  ? rawApiBaseUrl.replace(/\/+$/, "")
+  : import.meta.env.DEV
+    ? "http://localhost:3000"
+    : "";
+
+if (!API_BASE_URL) {
+  throw new Error("VITE_API_URL doit etre defini en production.");
+}
 
 async function request(path, { method = "GET", writePassword, body } = {}) {
   const headers = {};
